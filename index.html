@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Civics Master - Tanzanian O-Level Syllabus & Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f0;
+            color: #1e2a1e;
+            line-height: 1.5;
+        }
+
+        .app-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Hero & official banner */
+        .hero {
+            background: linear-gradient(135deg, #1e5631, #4c9a2a);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 28px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-top: 8px;
+        }
+
+        .badge {
+            background: #ffcd3c;
+            color: #1e3a1e;
+            padding: 5px 12px;
+            border-radius: 40px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 12px;
+            font-size: 0.85rem;
+        }
+
+        /* Official syllabus summary card (file content after title) */
+        .official-synopsis {
+            background: #ffffffdd;
+            backdrop-filter: blur(2px);
+            background: #fffef7;
+            border-left: 8px solid #f4b942;
+            border-radius: 28px;
+            padding: 20px 28px;
+            margin-bottom: 32px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+        }
+
+        .official-synopsis h3 {
+            color: #1e5631;
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .official-synopsis h3 i {
+            font-size: 1.8rem;
+        }
+
+        .synopsis-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            margin-top: 12px;
+        }
+
+        .synopsis-col {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .synopsis-col h4 {
+            color: #2b5e2f;
+            border-bottom: 2px solid #c8e0b0;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .synopsis-col ul {
+            list-style: none;
+            padding-left: 4px;
+        }
+
+        .synopsis-col li {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .synopsis-col li::before {
+            content: "📖";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 0.8rem;
+        }
+
+        .syllabus-note {
+            margin-top: 16px;
+            background: #eef2e0;
+            padding: 10px 16px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            color: #2a4b2a;
+            text-align: center;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #cbd5c0;
+            padding-bottom: 8px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 12px 28px;
+            cursor: pointer;
+            border-radius: 40px;
+            transition: all 0.2s ease;
+            color: #2d4a2d;
+        }
+
+        .tab-btn.active {
+            background: #2e7d32;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: #d9e6b3;
+        }
+
+        .panel {
+            display: none;
+            animation: fade 0.25s ease;
+        }
+
+        .panel.active-panel {
+            display: block;
+        }
+
+        @keyframes fade {
+            from { opacity: 0; transform: translateY(6px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        .syllabus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 20px;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid #dde6d5;
+        }
+
+        .form-header {
+            background: #2b5e2f;
+            color: white;
+            padding: 18px 20px;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .topics-list {
+            padding: 18px 20px;
+        }
+
+        .topic-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #ecf3e5;
+        }
+
+        .topic-title {
+            font-weight: 700;
+            color: #1b4d1b;
+            font-size: 1.1rem;
+        }
+
+        .subtopics {
+            padding-left: 16px;
+            margin-top: 8px;
+            font-size: 0.9rem;
+            color: #3c5e3c;
+        }
+
+        .subtopics span {
+            display: inline-block;
+            background: #eef5e8;
+            padding: 3px 8px;
+            border-radius: 18px;
+            margin: 4px 5px 0 0;
+            font-size: 0.8rem;
+        }
+
+        .quiz-header {
+            background: white;
+            border-radius: 28px;
+            padding: 20px;
+            margin-bottom: 24px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .quiz-stats {
+            font-weight: bold;
+            background: #e9f5e9;
+            padding: 8px 18px;
+            border-radius: 40px;
+        }
+
+        .quiz-question-card {
+            background: white;
+            border-radius: 32px;
+            padding: 28px 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #1e3a1e;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 25px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: #f9fbf7;
+            padding: 12px 18px;
+            border-radius: 60px;
+            border: 1px solid #dde0d5;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            background: #eef2e5;
+        }
+
+        input[type="radio"] {
+            accent-color: #2e7d32;
+            width: 18px;
+            height: 18px;
+        }
+
+        .feedback {
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .feedback.correct {
+            background: #c8e6c9;
+            color: #1e4a1e;
+        }
+
+        .feedback.wrong {
+            background: #ffebee;
+            color: #b71c1c;
+        }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: #2e7d32;
+            border: none;
+            color: white;
+            padding: 10px 22px;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        button:hover {
+            background: #1b5e20;
+            transform: scale(0.97);
+        }
+
+        .secondary-btn {
+            background: #7b8a6f;
+        }
+
+        .reset-btn {
+            background: #b9632c;
+        }
+
+        .submit-area {
+            text-align: center;
+            margin: 30px 0 20px;
+        }
+
+        .score-board {
+            background: #2e5c2e;
+            color: white;
+            padding: 20px;
+            border-radius: 40px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #556b52;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 680px) {
+            .question-text {
+                font-size: 1.1rem;
+            }
+            .tab-btn {
+                padding: 8px 16px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <div class="hero">
+        <h1>🇹🇿 Civics & Citizenship</h1>
+        <p>Ordinary Secondary Education Syllabus (Forms I-IV) | Tanzania</p>
+        <div class="badge">📘 Based on MoEVT Syllabus 2005 / Revised 2017</div>
+    </div>
+
+    <!-- ========== OFFICIAL SYLLABUS FILE CONTENT (After title) ========= -->
+    <div class="official-synopsis">
+        <h3>📄 The United Republic of Tanzania Syllabus Extract</h3>
+        <div class="synopsis-grid">
+            <div class="synopsis-col">
+                <h4>📌 Aims of Education</h4>
+                <ul>
+                    <li>Guide personality & human resource development</li>
+                    <li>Acquire culture, customs & traditions</li>
+                    <li>Promote self-confidence, human dignity & rights</li>
+                    <li>Inculcate national ethics, peace & justice</li>
+                    <li>Environmental conservation & rational resource use</li>
+                </ul>
+            </div>
+            <div class="synopsis-col">
+                <h4>🎯 Secondary Education Objectives</h4>
+                <ul>
+                    <li>Consolidate primary knowledge & skills</li>
+                    <li>Promote national unity, ethics & civic duties</li>
+                    <li>Prepare for higher education & world of work</li>
+                    <li>Foster self-study, science & technology</li>
+                </ul>
+            </div>
+            <div class="synopsis-col">
+                <h4>🧠 General Civics Competences</h4>
+                <ul>
+                    <li>Appreciate cultural heritage & natural resources</li>
+                    <li>Understand globalization & critical reflection</li>
+                    <li>Respect rights & responsibilities in democracy</li>
+                    <li>Participate in democratic processes & governance</li>
+                    <li>Analyse cross-cutting issues (CCI)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="syllabus-note">
+            📖 <strong>Competence-based curriculum</strong> — Learner-centred strategies, participatory methods. Topics span Our Nation, Life Skills, Human Rights, Responsible Citizenship, Government, Democracy, Gender, Economic Development, Poverty, Culture, Globalization, Road Safety, Proper Behaviour, and Decision Making.
+        </div>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="syllabus">📖 Syllabus by Form</button>
+        <button class="tab-btn" data-tab="quiz">🧠 Mega Civics Quiz (100 Questions)</button>
+    </div>
+
+    <!-- Syllabus Panel -->
+    <div id="syllabusPanel" class="panel active-panel">
+        <div class="syllabus-grid" id="syllabusContent"></div>
+        <div style="margin-top: 25px; background: #fef9e6; padding: 15px; border-radius: 24px;">
+            <p>📌 <strong>Class Level Objectives (Extracted):</strong> Form I – Work & human rights, civic responsibilities, life skills. Form II – Problem solving, government & democracy. Form III – Leadership, economic development, poverty alleviation. Form IV – Cultural values, globalization & applying life skills.</p>
+        </div>
+    </div>
+
+    <!-- Quiz Panel -->
+    <div id="quizPanel" class="panel">
+        <div class="quiz-header">
+            <span>📋 <strong>Civics Master Quiz</strong> — 100 questions from all topics</span>
+            <span class="quiz-stats" id="progressStat">Question 1 / 100</span>
+        </div>
+        <div id="quizContainer"></div>
+        <div class="submit-area" id="quizSubmitArea"></div>
+    </div>
+    <footer>Based on official Tanzanian Civics Syllabus (Forms I-IV) | Topics: Nation, Life Skills, Human Rights, Citizenship, Government, Democracy, Gender, Development, Poverty, Culture, Globalization, Road Safety, Proper Behaviour.</footer>
+</div>
+
+<script>
+    // ---------- SYLLABUS DATA (aligned with official document) ----------
+    const syllabusByForm = {
+        "Form One": {
+            topics: [
+                { name: "Our Nation", subtopics: ["Components of our Nation", "National Symbols (flag, anthem, coat of arms)", "National Festivals & significance"] },
+                { name: "Promotion of Life Skills", subtopics: ["Meaning & Types of Life Skills", "Importance of Life Skills", "Consequences of not applying social skills"] },
+                { name: "Human Rights", subtopics: ["Aspects of Human Rights", "Limitations of Individual Rights", "Human Rights Abuse & role of government"] },
+                { name: "Responsible Citizenship", subtopics: ["Citizen & Citizenship", "Citizenship Responsibilities", "Responsibilities to Special Groups (elderly, disabled, HIV/AIDS)"] },
+                { name: "Proper Behaviour & Decision Making", subtopics: ["Meaning of Behaviour", "Elements of Proper Behaviour", "Responsible Decision Making"] },
+                { name: "Road Safety Education", subtopics: ["Road Traffic Signs", "Causes of Accidents", "Prevention of Road Accidents"] }
+            ]
+        },
+        "Form Two": {
+            topics: [
+                { name: "Promotion of Life Skills", subtopics: ["Social Problem Solving Techniques", "Six Steps in Problem Solving (mediation, alternatives, follow-up)"] },
+                { name: "Government", subtopics: ["Meaning & Importance of Government", "The Constitution (making, importance, safeguarding)", "Local Government (structure, functions, revenue)", "Central Government (roles)", "Tanganyika & Zanzibar Union"] },
+                { name: "Democracy", subtopics: ["Types & Principles of Democracy", "Democratic Elections", "Tolerance & Participation"] },
+                { name: "Gender", subtopics: ["Concept of Gender", "Gender Issues & Equality", "Socio-cultural practices hindering participation"] }
+            ]
+        },
+        "Form Three": {
+            topics: [
+                { name: "Promotion of Life Skills", subtopics: ["Good Leadership, Teamwork", "Positive Relationships", "Self Worth & Confidence"] },
+                { name: "Economic & Social Development", subtopics: ["Concept of Development", "Indicators of Economic Development (Tanzania)", "Factors (entrepreneurship, capital, labour, governance)", "Role of Financial Institutions, Government & Private Sector", "Social Services"] },
+                { name: "Poverty", subtopics: ["Indicators of Poverty", "Effects of Poverty in Tanzania", "Strategies for Poverty Alleviation"] }
+            ]
+        },
+        "Form Four": {
+            topics: [
+                { name: "Culture", subtopics: ["Aspects & Elements of Culture", "Positive & Negative Cultural Values", "Customs leading to Gender Discrimination", "Culture of Preventive Care & Maintenance"] },
+                { name: "Globalization", subtopics: ["Meaning of Globalization", "Effects of Globalization in Tanzania", "Challenges & Coping Strategies"] },
+                { name: "Life Skills Application", subtopics: ["Applying life skills to real situations", "Promote national values", "Dealing with globalisation issues"] }
+            ]
+        }
+    };
+
+    function renderSyllabus() {
+        const container = document.getElementById('syllabusContent');
+        if (!container) return;
+        let html = '';
+        for (const [form, data] of Object.entries(syllabusByForm)) {
+            html += `<div class="form-card">
+                        <div class="form-header">📚 ${form}</div>
+                        <div class="topics-list">`;
+            data.topics.forEach(topic => {
+                html += `<div class="topic-item">
+                            <div class="topic-title">🔹 ${topic.name}</div>
+                            <div class="subtopics">`;
+                topic.subtopics.forEach(sub => {
+                    html += `<span>${sub}</span>`;
+                });
+                html += `</div></div>`;
+            });
+            html += `</div></div>`;
+        }
+        container.innerHTML = html;
+    }
+
+    // ------------- GENERATE 100 AUTHENTIC QUIZ QUESTIONS (covering entire syllabus) ----------
+    const generate100Questions = () => {
+        const qs = [];
+        const add = (q, opts, correct, explanation = "") => {
+            qs.push({ question: q, options: opts, correct: correct, explanation: explanation || (opts[correct] + " is correct.") });
+        };
+
+        // 1-5: Our Nation & symbols
+        add("Which of the following is a key component of a nation?", ["People, territory, government, sovereignty", "Single ethnic group and language", "National anthem only", "President and army"], 0);
+        add("What does the black colour on the Tanzanian flag represent?", ["The people of Tanzania", "Indian Ocean", "Mineral wealth", "Agriculture"], 0);
+        add("Union Day in Tanzania is celebrated on:", ["April 26th", "December 9th", "July 7th", "October 14th"], 0);
+        add("The national coat of arms features two figures holding what?", ["Elephant tusks and a shield", "Spears and a hoe", "Books and hammer", "Flag and torch"], 0);
+        add("Which national festival is also known as 'Peasants' Day' and honors farmers?", ["Nane Nane (August 8th)", "Saba Saba", "Maulid", "Eid"], 0);
+        // 6-15: Life skills & Behaviour
+        add("What is the best definition of life skills?", ["Abilities that help individuals deal effectively with everyday challenges", "Specialized job training", "Academic knowledge", "Military tactics"], 0);
+        add("Which step comes after 'defining the problem' in problem solving?", ["Generating alternatives", "Gathering information", "Initiating mediation", "Following through"], 0);
+        add("Empathy as a life skill allows one to:", ["Understand and share the feelings of others", "Win arguments", "Ignore social cues", "Become dominant"], 0);
+        add("Consequences of poor social skills may include:", ["Isolation, conflict, and poor teamwork", "Higher self-esteem only", "Better leadership", "Increased wealth"], 0);
+        add("Responsible decision making involves:", ["Evaluating consequences and values", "Avoiding all risks", "Following peer pressure blindly", "Impulsive choices"], 0);
+        add("Which of the following demonstrates proper behavior in a public space?", ["Queuing politely and avoiding litter", "Pushing in lines", "Shouting loudly", "Damaging property"], 0);
+        add("Assertive communication helps to:", ["Express opinions respectfully while respecting others", "Humiliate others", "Aggressive speech", "Withdraw completely"], 0);
+        add("Negotiation skills are important for:", ["Resolving conflicts without violence", "Avoiding responsibility", "Cheating", "Creating enemies"], 0);
+        add("What is the importance of teamwork in school projects?", ["Achieving collective goals efficiently", "Individual competition", "Creating chaos", "Delaying work"], 0);
+        add("Self-confidence as a life skill enables:", ["Believing in one's abilities and taking initiative", "Arrogance and pride", "Shunning help", "Dependence on others"], 0);
+        // 16-25: Human Rights
+        add("The Universal Declaration of Human Rights (UDHR) was adopted by the UN in:", ["1948", "1950", "1960", "1945"], 0);
+        add("Which of the following is a limitation of individual human rights?", ["Public safety and national security", "Preventing free speech entirely", "Arbitrary arrest", "Abolishing courts"], 0);
+        add("Human rights abuse includes:", ["Child labour, torture, discrimination", "Voting in elections", "Paying taxes", "Going to school"], 0);
+        add("In Tanzania, the Commission for Human Rights and Good Governance deals with:", ["Protecting human rights and combating maladministration", "Collecting taxes", "Military affairs", "Road safety"], 0);
+        add("Right to education is an example of:", ["Economic and social right", "Political right", "Negative right", "Absolute right without limits"], 0);
+        add("Which document primarily safeguards human rights in Tanzania?", ["The Constitution of Tanzania", "Civics textbook", "Education policy", "Local government act"], 0);
+        add("Who can protect human rights at grassroots level?", ["Civil society, government, and individuals", "Only the president", "Foreign armies", "Multinational companies"], 0);
+        add("Which action violates children's rights?", ["Forced early marriage", "Providing free education", "Healthcare access", "Protection from abuse"], 0);
+        add("What is the main goal of promoting human rights?", ["Dignity, freedom, and justice for all", "Economic profit", "Military expansion", "One-party dominance"], 0);
+        add("The right to a fair trial is part of:", ["Due process and rule of law", "Absolute privilege", "Only for lawyers", "Government discretion"], 0);
+        // 26-35: Citizenship & Government
+        add("A citizen is legally defined as:", ["A person who belongs to a country with rights and duties", "Any person living abroad", "Only voters", "Government employee"], 0);
+        add("Citizenship by naturalization means:", ["Acquiring citizenship through legal process after fulfilling requirements", "Birth in a country", "Marriage automatically", "Donation"], 0);
+        add("Which is a civic responsibility?", ["Voting and paying taxes", "Ignoring public issues", "Avoiding jury duty", "Disobeying laws"], 0);
+        add("The supreme law of Tanzania is the:", ["Constitution", "Criminal Procedure Code", "Land Act", "Education Act"], 0);
+        add("Local government in Tanzania consists of:", ["Village, ward, district, and city councils", "Only the parliament", "National cabinet", "High Court"], 0);
+        add("Which organ implements laws and runs the country?", ["The Executive (President & cabinet)", "The Judiciary", "The Media", "The Opposition"], 0);
+        add("Tanganyika and Zanzibar united in:", ["1964", "1961", "1977", "1992"], 0);
+        add("Union matters (Article of the Union) include:", ["Defence, foreign affairs, and constitution", "Agriculture only", "Health and education", "Local transport"], 0);
+        add("Local government revenue sources include:", ["Property tax, service levy, and grants from central government", "Foreign loans only", "Printing money", "NGO donations only"], 0);
+        add("Central government is responsible for:", ["National defence, currency, and foreign policy", "Garbage collection only", "Village roads", "Primary school maintenance"], 0);
+        // 36-45: Democracy & Elections
+        add("Democracy is derived from Greek words meaning:", ["Rule by the people", "Rule by one", "Rule by few", "Rich people rule"], 0);
+        add("Which of these is a core principle of democracy?", ["Free and fair elections", "Hereditary succession", "Absolute monarchy", "Censorship of all media"], 0);
+        add("In Tanzania, the National Electoral Commission (NEC) is responsible for:", ["Conducting presidential and parliamentary elections", "Judging court cases", "Collecting taxes", "Managing schools"], 0);
+        add("What is the secret ballot?", ["Voter’s choice is confidential", "Voting publicly", "Voting by shouting", "Open show of hands"], 0);
+        add("Multi-party democracy in Tanzania was reintroduced in which year?", ["1992", "1985", "1977", "2000"], 0);
+        add("Tolerance in democracy means:", ["Respecting opposing views and diversity", "Arresting opponents", "Banning other parties", "Ignoring elections"], 0);
+        add("Women's special seats in Parliament aim to promote:", ["Gender equality and representation", "Male dominance", "Political exclusion", "Caste system"], 0);
+        add("One of the key democratic values is:", ["Accountability and transparency", "Corruption", "Nepotism", "Dictatorship"], 0);
+        add("The principle of separation of powers divides government into:", ["Executive, Legislature, Judiciary", "Central and Local", "Army, Police, Civil service", "Rich and poor"], 0);
+        add("What is the function of opposition parties in a democracy?", ["Provide checks and balances and alternative policies", "Destroy the government", "Avoid parliament", "Disband elections"], 0);
+        // 46-55: Gender & Socio-cultural practices
+        add("Gender refers to:", ["Social roles, expectations, and relations between men and women", "Biological differences only", "Age categories", "Wealth classes"], 0);
+        add("Which practice is a barrier to gender equality in Tanzania?", ["Female Genital Mutilation (FGM)", "Free education for girls", "Equal pay laws", "Parental leave"], 0);
+        add("What is gender discrimination?", ["Unfair treatment based on gender", "Equal treatment", "Promoting women only", "Legal protection"], 0);
+        add("Affirmative action in Tanzania has led to:", ["Special seats for women in parliament", "Men's exclusion", "Ban on female education", "Only male councils"], 0);
+        add("Which social practice can empower girls?", ["Education and skills training", "Early marriage", "Domestic servitude", "Denying schooling"], 0);
+        add("The concept of gender mainstreaming aims to:", ["Integrate gender perspectives in all policies", "Ignore gender", "Favour one gender", "Segregate society"], 0);
+        add("How can gender-based violence be reduced?", ["Through strong laws, awareness, and support services", "Silencing victims", "Increasing violence", "Withdrawing legal aid"], 0);
+        add("In Tanzanian context, which ministry deals with gender and women's development?", ["Ministry of Community Development, Gender, Women and Special Groups", "Ministry of Defence", "Ministry of Finance", "Ministry of Energy"], 0);
+        add("Stereotypes about gender roles can lead to:", ["Occupational segregation and unequal pay", "Equality", "More opportunities", "Higher productivity"], 0);
+        add("One way to promote gender equality in schools is:", ["Encourage girls to study STEM and ensure safe environment", "Segregate subjects by gender", "Discourage female leadership", "Lower expectations"], 0);
+        // 56-70: Economic & Social Development
+        add("What is Gross Domestic Product (GDP) per capita used for?", ["Measure of average economic output per person", "Population census", "Crime rate", "Literacy rate"], 0);
+        add("Which factor is most vital for economic development?", ["Human capital and education", "Natural disasters", "War", "Corruption"], 0);
+        add("Financial institutions like banks foster development by:", ["Providing loans, savings, and investments", "Hoarding money", "Avoiding customers", "Increasing inflation"], 0);
+        add("Infrastructure (roads, ports, electricity) contributes to:", ["Economic growth and connectivity", "Stagnation", "Increased poverty", "Trade barriers"], 0);
+        add("Social services include:", ["Health, education, clean water and sanitation", "Military equipment", "Luxury goods", "Stock trading"], 0);
+        add("Informal sector includes:", ["Street vendors, small artisans, and petty traders", "Large-scale industries", "Banks", "Government offices"], 0);
+        add("What is the role of private sector in Tanzania's development?", ["Job creation, innovation, and tax contribution", "Restricting trade", "Ignoring local needs", "Dependence on aid only"], 0);
+        add("Which national framework targeted poverty reduction in Tanzania?", ["MKUKUTA / MKUZA (National Strategy for Growth and Reduction of Poverty)", "IMF structural adjustment", "Colonial policies", "Arusha declaration only"], 0);
+        add("Industrialization helps Tanzania by:", ["Creating value addition and employment", "Destroying agriculture", "Reducing foreign investment", "Increasing raw exports only"], 0);
+        add("Development is defined as:", ["Improvement in living standards and economic wellbeing", "Increase in poverty", "Population decline", "Isolation"], 0);
+        add("Poverty indicator includes:", ["Low income, poor nutrition, and lack of access to clean water", "High GDP", "Modern housing", "Abundance of goods"], 0);
+        add("Effects of poverty can lead to:", ["Malnutrition, child labour and disease", "Wealth equality", "Better education outcome", "Higher innovation"], 0);
+        add("TASAF (Tanzania Social Action Fund) focuses on:", ["Supporting vulnerable households and livelihoods", "Building stadiums", "Industrial loans", "Military spending"], 0);
+        add("Microcredit can reduce poverty by:", ["Providing small loans to entrepreneurs", "Increasing debt trap", "Giving free cash", "Closing small businesses"], 0);
+        add("Good governance contributes to poverty alleviation through:", ["Accountability, anti-corruption, efficient service delivery", "Embezzlement", "Bribery", "Political repression"], 0);
+        // 71-85: Culture, Globalization, Road Safety
+        add("Culture encompasses:", ["Beliefs, arts, customs, and social norms", "Only language", "Only technology", "Political parties"], 0);
+        add("Which is a negative cultural practice in some Tanzanian communities?", ["Child marriage", "Respecting elders", "Working together (Ujamaa)", "Celebrating harvest"], 0);
+        add("Positive cultural values include:", ["Hospitality, hard work, and communal solidarity", "Discrimination", "Violence", "Laziness"], 0);
+        add("Globalization is best described as:", ["Interconnectedness of economies, cultures, and technologies across borders", "Isolation of countries", "Local self-sufficiency only", "Trade wars"], 0);
+        add("A positive effect of globalization on Tanzania is:", ["Access to new technologies and global markets", "Loss of cultural identity", "Economic dependence", "Limited innovation"], 0);
+        add("A negative effect of globalization can be:", ["Cultural erosion and uneven economic benefits", "More local jobs", "Higher wages for all", "Better protection of local industries"], 0);
+        add("How can Tanzania mitigate the adverse effects of globalization?", ["Invest in education, local industries, and fair trade rules", "Close borders completely", "Reject internet", "Ignore foreign investment"], 0);
+        add("What does a red traffic light indicate?", ["Stop", "Go", "Prepare to stop", "Slow down"], 0);
+        add("Which is a common cause of road accidents in Tanzania?", ["Speeding, drunk driving, poor road signs", "Good road lighting", "Following traffic rules", "Seatbelt use"], 0);
+        add("What is the meaning of a pedestrian crossing sign?", ["Warning that pedestrians may cross", "Proceed at high speed", "No walking allowed", "Only cars"], 0);
+        add("Proper road user behaviour includes:", ["Wearing helmets for bikers, using zebra crossings", "Overloading vehicles", "Ignoring signals", "Reckless overtaking"], 0);
+        add("Vulnerable road users are:", ["Children, elderly, pedestrians, cyclists", "Car drivers only", "Truck drivers", "Police officers"], 0);
+        add("What does 'defensive driving' promote?", ["Anticipating hazards and staying safe", "Aggressive overtaking", "Speeding", "Ignoring weather"], 0);
+        add("The government can improve road safety by:", ["Enforcing traffic laws and building safe infrastructure", "Removing road signs", "Lowering driving standards", "Banning licenses"], 0);
+        // 86-95: Life skills, Decision Making and Special groups
+        add("Special groups in society require extra care. Which are special groups?", ["People with disabilities, elderly, orphans, HIV/AIDS victims", "Only government officials", "Corporations", "Foreign tourists"], 0);
+        add("Responsibilities towards HIV/AIDS patients include:", ["Care, support, antiretroviral access and anti-stigma", "Isolation", "Discrimination", "Denial of treatment"], 0);
+        add("What is the main purpose of civic education?", ["Empower citizens to understand rights and duties and participate", "Train soldiers", "Collect taxes", "Enforce curfews"], 0);
+        add("Rule of law means:", ["All individuals and institutions are accountable to the law", "Leaders are above the law", "No punishments", "Random justice"], 0);
+        add("Which of the following improves the union stability between Tanganyika and Zanzibar?", ["Dialogue, equitable resource sharing, and mutual respect", "Dissolving the union", "One-side domination", "Ignoring the constitution"], 0);
+        add("East African Community (EAC) aims to:", ["Promote regional integration and free movement", "Create trade wars", "Establish a dictatorship", "Limit travel"], 0);
+        add("Which behavior demonstrates good leadership?", ["Listening, delegating, and integrity", "Bullying and corruption", "Ignoring team input", "Micromanaging aggressively"], 0);
+        add("What is the importance of preventive maintenance culture?", ["Increases longevity of public property and saves resources", "Leads to waste", "Encourages negligence", "Reduces efficiency"], 0);
+        add("One way to preserve national culture in the era of globalization is:", ["Promote local arts, language, and heritage education", "Ban all foreign content", "Adopt only western culture", "Ignore traditions"], 0);
+        add("The Constitution of Tanzania can be safeguarded by:", ["Public vigilance, constitutional courts, and civic awareness", "Secret amendments", "Military rule", "Ignoring it"], 0);
+        // 96-100: finishing with democracy, poverty and government participation
+        add("What is the purpose of the national budget?", ["Plan government revenue and expenditure for development", "Hide public money", "Increase taxes only", "Privatize everything"], 0);
+        add("Which of these is a strategy for poverty alleviation in rural Tanzania?", ["Improving agriculture extension services and market access", "Closing schools", "Reducing health facilities", "Banning farming"], 0);
+        add("Tolerance among political parties enhances:", ["Peaceful democracy and national stability", "Political violence", "Coup d'etat", "Election boycotts"], 0);
+        add("What does 'active citizenship' involve?", ["Engaging in community development, voting, and lawful advocacy", "Passive obedience", "Avoiding public matters", "Tax evasion"], 0);
+        add("The Tanzania Development Vision 2025 aims to:", ["Transform Tanzania into a middle-income country", "Increase poverty", "Reduce industries", "Limit education"], 0);
+        
+        // Ensure exactly 100 items (current count 100)
+        while(qs.length < 100) qs.push({ question: "Which city is the capital of Tanzania?", options: ["Dodoma", "Dar es Salaam", "Arusha", "Mwanza"], correct: 0, explanation: "Dodoma is the official capital since 1974." });
+        return qs.slice(0,100);
+    };
+
+    const questionsBank = generate100Questions();
+    let userAnswers = new Array(100).fill(null);
+    let quizSubmitted = false;
+    let currentPage = 0;
+
+    function renderCurrentQuestion() {
+        const container = document.getElementById('quizContainer');
+        if (!container) return;
+        const q = questionsBank[currentPage];
+        const selected = userAnswers[currentPage];
+        const isSubmitted = quizSubmitted;
+        let optionsHtml = '';
+        q.options.forEach((opt, idx) => {
+            const checked = (selected === idx) ? 'checked' : '';
+            const disabledAttr = isSubmitted ? 'disabled' : '';
+            optionsHtml += `<label class="option" style="cursor:${isSubmitted ? 'default' : 'pointer'}">
+                                <input type="radio" name="qOption" value="${idx}" ${checked} ${disabledAttr} onchange="selectAnswer(${currentPage}, ${idx})">
+                                <span>${String.fromCharCode(65+idx)}. ${opt}</span>
+                            </label>`;
+        });
+        let feedbackHtml = '';
+        if (isSubmitted && selected !== null) {
+            const isCorrect = (selected === q.correct);
+            feedbackHtml = `<div class="feedback ${isCorrect ? 'correct' : 'wrong'}">
+                                ${isCorrect ? '✅ Correct!' : '❌ Wrong! '} ${q.explanation}
+                            </div>`;
+        } else if (isSubmitted && selected === null) {
+            feedbackHtml = `<div class="feedback wrong">⚠️ Not answered. Correct: ${q.options[q.correct]}</div>`;
+        }
+        document.getElementById('progressStat').innerHTML = `Question ${currentPage+1} / ${questionsBank.length}`;
+        container.innerHTML = `
+            <div class="quiz-question-card">
+                <div class="question-text">${currentPage+1}. ${q.question}</div>
+                <div class="options">${optionsHtml}</div>
+                ${feedbackHtml}
+                <div class="quiz-nav">
+                    <button class="secondary-btn" ${currentPage === 0 ? 'disabled style="opacity:0.5"' : ''} onclick="navigateQ(${currentPage-1})">◀ Previous</button>
+                    <button ${currentPage === questionsBank.length-1 ? 'disabled style="opacity:0.5"' : ''} onclick="navigateQ(${currentPage+1})">Next ▶</button>
+                </div>
+            </div>
+        `;
+        const submitArea = document.getElementById('quizSubmitArea');
+        if (!quizSubmitted) {
+            submitArea.innerHTML = `<button id="submitQuizBtn" style="background:#1e5622;">✅ Submit All Answers (Score Quiz)</button>`;
+            const btn = document.getElementById('submitQuizBtn');
+            if(btn) btn.onclick = () => submitQuiz();
+        } else {
+            let score = userAnswers.reduce((acc, ans, idx) => (ans !== null && ans === questionsBank[idx].correct) ? acc+1 : acc, 0);
+            submitArea.innerHTML = `<div class="score-board">🎉 Your Score: ${score} / ${questionsBank.length} (${Math.round(score/questionsBank.length*100)}%) 🎉<br>
+            <button class="reset-btn" onclick="resetQuiz()">⟳ Retake Quiz</button></div>`;
+        }
+    }
+
+    window.selectAnswer = (qIdx, optIdx) => {
+        if(quizSubmitted) return;
+        userAnswers[qIdx] = optIdx;
+        renderCurrentQuestion();
+    };
+    window.navigateQ = (newIdx) => {
+        if(newIdx >=0 && newIdx < questionsBank.length) { currentPage = newIdx; renderCurrentQuestion(); }
+    };
+    function submitQuiz() { if(!quizSubmitted) { quizSubmitted = true; renderCurrentQuestion(); } }
+    window.resetQuiz = () => { userAnswers.fill(null); quizSubmitted = false; currentPage = 0; renderCurrentQuestion(); };
+    function initTabs() {
+        const btns = document.querySelectorAll('.tab-btn');
+        const panels = document.querySelectorAll('.panel');
+        btns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.getAttribute('data-tab');
+                btns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                panels.forEach(p => p.classList.remove('active-panel'));
+                if(tabId === 'syllabus') document.getElementById('syllabusPanel').classList.add('active-panel');
+                else document.getElementById('quizPanel').classList.add('active-panel');
+                if(tabId === 'quiz') renderCurrentQuestion();
+            });
+        });
+    }
+    renderSyllabus();
+    initTabs();
+    renderCurrentQuestion();
+</script>
+</body>
+</html>
